@@ -35,16 +35,6 @@ public class OperationsView extends VBox {
 		viewAllConnectionsBtn.setOnAction(e-> controller.viewAllConnectionsBtn());
 		viewAllConnectionsBtn.disableProperty().bind(AppStaticData.SERVER_RUNNING_PROPERTY.not());
 		//
-		Button copyServerIpBtn = new Button("Copy Server IP");
-		copyServerIpBtn.setMaxWidth(Double.MAX_VALUE);
-		copyServerIpBtn.setOnAction(e -> controller.copyServerIP());
-		copyServerIpBtn.disableProperty().bind(AppStaticData.SERVER_RUNNING_PROPERTY.not());
-		//
-		Button copyServerPortBtn = new Button("Copy Server Port");
-		copyServerPortBtn.setMaxWidth(Double.MAX_VALUE);
-		copyServerPortBtn.setOnAction(e -> controller.copyServerPort());
-		copyServerPortBtn.disableProperty().bind(AppStaticData.SERVER_RUNNING_PROPERTY.not());
-		//
 		Pane xHPane = new Pane();
 		VBox.setVgrow(xHPane, Priority.ALWAYS);
 		//
@@ -60,7 +50,7 @@ public class OperationsView extends VBox {
 		serverConfigBtn.setOnAction(e-> controller.serverConfig());
 		serverConfigBtn.setMaxWidth(Double.MAX_VALUE);
 		//
-		this.getChildren().addAll(startBtn, stopBtn, restartBtn, viewAllConnectionsBtn, copyServerIpBtn, copyServerPortBtn, xHPane, clearLogsBtn, downloadLogsBtn, serverConfigBtn);
+		this.getChildren().addAll(startBtn, stopBtn, restartBtn, viewAllConnectionsBtn, xHPane, clearLogsBtn, downloadLogsBtn, serverConfigBtn);
 	}
 
 }

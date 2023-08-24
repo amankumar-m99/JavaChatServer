@@ -8,19 +8,27 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import operations.OperationsController;
+import statusbar.StatusBarController;
 
 public class HomePageController {
 
 	private HomePageView homePageView;
 	private HeaderController headerController;
 	private OperationsController operationsController;
+	private StatusBarController statusBarController;
 
 	public HomePageController() {
 		homePageView = new HomePageView(this);
+		//
 		headerController = new HeaderController();
 		homePageView.setTop(headerController.getView());
+		//
 		operationsController = new OperationsController();
 		homePageView.setRight(operationsController.getView());
+		//
+		statusBarController = new StatusBarController();
+		homePageView.setBottom(statusBarController.getView());
+		//
 		TextArea textArea = new TextArea();
 		textArea.setEditable(false);
 		textArea.textProperty().bind(AppStaticData.SERVER_LOGS_PROPERTY);
