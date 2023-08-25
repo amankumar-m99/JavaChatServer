@@ -30,7 +30,7 @@ public class OperationsView extends VBox {
 		restartBtn.setOnAction(e -> controller.restartServer());
 		restartBtn.disableProperty().bind(AppStaticData.SERVER_RUNNING_PROPERTY.not());
 		//
-		Button viewAllConnectionsBtn = new Button("View All Connections");
+		Button viewAllConnectionsBtn = new Button("Active Connections");
 		viewAllConnectionsBtn.setMaxWidth(Double.MAX_VALUE);
 		viewAllConnectionsBtn.setOnAction(e-> controller.viewAllConnectionsBtn());
 		viewAllConnectionsBtn.disableProperty().bind(AppStaticData.SERVER_RUNNING_PROPERTY.not());

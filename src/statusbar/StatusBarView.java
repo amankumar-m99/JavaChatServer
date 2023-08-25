@@ -23,12 +23,14 @@ public class StatusBarView extends HBox {
 		this.setPadding(new Insets(10, 20, 10, 20));
 		Pane xPane = new Pane();
 		HBox.setHgrow(xPane, Priority.ALWAYS);
-		getChildren().addAll(xPane, getConnectedNodesStatus(), new Separator(Orientation.VERTICAL), getRunninnngStatus());
+		Node activeConnectionIndicator = getActiveConnectionsIndicator();
+		activeConnectionIndicator.disableProperty().bind(AppStaticData.SERVER_RUNNING_PROPERTY.not());
+		getChildren().addAll(xPane, activeConnectionIndicator, new Separator(Orientation.VERTICAL), getRunninnngStatus());
 	}
 
-	private Node getConnectedNodesStatus() {
-		Label connectedNodesLabel = new Label("Connected Nodes: ");
-		Label connectedNodesValueLabel = new Label("670");
+	private Node getActiveConnectionsIndicator() {
+		Label connectedNodesLabel = new Label("Active Connections: ");
+		Label connectedNodesValueLabel = new Label("0");
 		CustumBinding.bind(connectedNodesValueLabel.textProperty(), AppStaticData.CLIENT_CONNECTIONS);
 		HBox hbox = new HBox(10, connectedNodesLabel, connectedNodesValueLabel);
 		return hbox;

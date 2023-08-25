@@ -5,8 +5,10 @@ import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 
 import appdata.AppStaticData;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ContextMenu;
 
 public class HeaderController {
 
@@ -41,5 +43,10 @@ public class HeaderController {
 		alert.setTitle("Copied to clipboard");
 		alert.setContentText("Content copied to clipboard.");
 		alert.showAndWait();
+	}
+
+	public void showContextMenu(Object object, double x, double y) {
+		ContextMenu contextMenu = headerView.getContextMenu();
+		contextMenu.show((Node) object, x, y);
 	}
 }
