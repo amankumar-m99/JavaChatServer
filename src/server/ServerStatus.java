@@ -8,12 +8,11 @@ public class ServerStatus {
 	private static String startingCSS = "-fx-text-fill: ORANGE;-fx-font-weight:bold;";
 	private static String stoppedCSS = "-fx-text-fill: RED;-fx-font-weight:bold;";
 
-	public static Label RUNNING = new Label("Running");
+	public static Label RUNNING = new Label("RUNNING");
 	public static Label STARTING = new Label("Starting");
-	public static Label STOPPED = new Label("Stopped");
+	public static Label STOPPED = new Label("STOPPED");
 
 	static{
-		System.out.println("static");
 		RUNNING.setStyle(runningCSS);
 		STARTING.setStyle(startingCSS);
 		STOPPED.setStyle(stoppedCSS);

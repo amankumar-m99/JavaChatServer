@@ -4,13 +4,9 @@ import javafx.scene.layout.BorderPane;
 
 public class HomePageView extends BorderPane{
 
-	private HomePageController controller;
+//	private HomePageController controller;
 
 	public HomePageView(HomePageController homePageController) {
-		this.controller = homePageController;
-		initHeader();
-	}
-
-	private void initHeader() {
+//		this.controller = homePageController;
 	}
 }

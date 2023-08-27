@@ -7,14 +7,10 @@ import java.util.Date;
 import java.util.Optional;
 
 import appdata.AppStaticData;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
 import javafx.stage.DirectoryChooser;
-import javafx.stage.Stage;
-import server.Server;
 import server.configuration.ServerConfigurationDialog;
 import util.Logger;
 
@@ -28,40 +24,6 @@ public class OperationsController {
 
 	public OperationsView getView() {
 		return operationsView;
-	}
-
-	public void startServer() {
-		try {
-			Thread serverThread = new Thread(new Server());
-			serverThread.setDaemon(true);
-			serverThread.start();
-			AppStaticData.SERVER_RUNNING_PROPERTY.setValue(true);
-		} catch (Exception e) {
-			AppStaticData.SERVER_RUNNING_PROPERTY.setValue(false);
-			e.printStackTrace();
-		}
-	}
-
-	public void stopServer() {
-		try {
-			AppStaticData.SERVER_SOCKET.close();
-			AppStaticData.SERVER_RUNNING_PROPERTY.setValue(false);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	public void restartServer() {
-		stopServer();
-		startServer();
-	}
-
-	public void viewAllConnectionsBtn() {
-		Stage stage = new Stage();
-		stage.setScene(new Scene(new Label("Sameple1"),700, 700));
-		stage.setTitle("skdvbesjf");
-		stage.initOwner(AppStaticData.PRIMARY_STAGE);
-		stage.show();
 	}
 
 	public void downloadLogs() {
@@ -144,5 +106,9 @@ public class OperationsController {
 		alert.setHeaderText("Clear all logs ?");
 		alert.setContentText("This action can't be reversed.");
 		return alert.showAndWait();
+	}
+
+	public void copyLogs() {
+		// TODO Auto-generated method stub
 	}
 }

@@ -1,6 +1,7 @@
 package homepage;
 
 import appdata.AppStaticData;
+import connection.logs.ConnectionLogView;
 import header.HeaderController;
 import javafx.scene.Node;
 import javafx.scene.control.TextArea;
@@ -20,7 +21,7 @@ public class HomePageController {
 	public HomePageController() {
 		homePageView = new HomePageView(this);
 		//
-		headerController = new HeaderController();
+		headerController = new HeaderController(this);
 		homePageView.setTop(headerController.getView());
 		//
 		operationsController = new OperationsController();
@@ -39,6 +40,10 @@ public class HomePageController {
 
 	public Node getView() {
 		return homePageView;
+	}
+
+	public void setLeft(ConnectionLogView connectionLogView) {
+		homePageView.setLeft(connectionLogView);
 	}
 
 }

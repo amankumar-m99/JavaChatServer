@@ -4,9 +4,11 @@ import appdata.AppStaticData;
 import javafx.geometry.Insets;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.ContextMenu;
-import javafx.scene.control.Hyperlink;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.SeparatorMenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -20,44 +22,72 @@ public class HeaderView extends HBox{
 
 	public HeaderView(HeaderController headerController) {
 		this.controller = headerController;
-		this.setSpacing(15);
+		this.setSpacing(20);
 		this.setPadding(new Insets(10, 20, 10, 20));
 		Pane pane = new Pane();
 		HBox.setHgrow(pane, Priority.ALWAYS);
-		Node copyServerIp = getCopyServerIpNode();
-		Node copyServerPort = getCopyServerPortNode();
 		ImageView settingImageView = getSettingsNode();
-		this.getChildren().addAll(pane, copyServerIp, copyServerPort, settingImageView);
+		Button startBtn = new Button("Start Server");
+		startBtn.setMaxWidth(Double.MAX_VALUE);
+		startBtn.setOnAction(e -> controller.startServer());
+		startBtn.disableProperty().bind(AppStaticData.SERVER_RUNNING_PROPERTY);
+		//
+		Button stopBtn = new Button("Stop Server");
+		stopBtn.setMaxWidth(Double.MAX_VALUE);
+		stopBtn.setOnAction(e -> controller.stopServer());
+		stopBtn.disableProperty().bind(AppStaticData.SERVER_RUNNING_PROPERTY.not());
+		//
+		Button restartBtn = new Button("Restart Server");
+		restartBtn.setMaxWidth(Double.MAX_VALUE);
+		restartBtn.setOnAction(e -> controller.restartServer());
+		restartBtn.disableProperty().bind(AppStaticData.SERVER_RUNNING_PROPERTY.not());
+		//
+		Button viewAllConnectionsBtn = new Button("Active Connections");
+		viewAllConnectionsBtn.setMaxWidth(Double.MAX_VALUE);
+		viewAllConnectionsBtn.setOnAction(e-> controller.viewAllConnectionsBtn());
+		viewAllConnectionsBtn.disableProperty().bind(AppStaticData.SERVER_RUNNING_PROPERTY.not());
+		//
+		getChildren().addAll(startBtn, stopBtn, restartBtn);
+		getChildren().add(viewAllConnectionsBtn);
+		getChildren().add(pane);
+		getChildren().add(getServerIpStatus());
+		getChildren().add(getServerPortStatus());
+		getChildren().addAll(settingImageView);
 	}
 
-	private Node getCopyServerIpNode(){
-		Hyperlink copyServerIp = new Hyperlink("Copy server IP");
-		copyServerIp.disableProperty().bind(AppStaticData.SERVER_RUNNING_PROPERTY.not());
-		copyServerIp.setOnAction(e-> copyServerIP(copyServerIp));
-		return copyServerIp;
+	private Node getServerIpStatus() {
+		Label label = new Label("Server Local IP: ");
+		Label localIpLabel = new Label(AppStaticData.SERVER_IP);
+		localIpLabel.setStyle("-fx-font-weight: bold");
+//		localIpLabel.textProperty().bind(AppStaticData.SERVER_IP);
+		ImageView copyImage = new ImageView(new Image("resources/copy.png"));
+		copyImage.setPreserveRatio(true);
+		copyImage.setFitHeight(20);
+		copyImage.visibleProperty().bind(AppStaticData.SERVER_RUNNING_PROPERTY);
+		HBox hbox = new HBox(10, label, localIpLabel, copyImage);
+		hbox.disableProperty().bind(AppStaticData.SERVER_RUNNING_PROPERTY.not());
+		return hbox;
 	}
 
-	private void copyServerIP(Hyperlink link) {
-		controller.copyServerIP();
-		link.setVisited(false);
+	private Node getServerPortStatus() {
+		Label label = new Label("Server Port: ");
+		Label localPortLabel = new Label(AppStaticData.SERVER_PORT);
+		localPortLabel.setStyle("-fx-font-weight: bold");
+//		localPortLabel.textProperty().bind(AppStaticData.SERVER_IP);
+		ImageView copyImage = new ImageView(new Image("resources/copy.png"));
+		copyImage.setPreserveRatio(true);
+		copyImage.setFitHeight(20);
+		copyImage.visibleProperty().bind(AppStaticData.SERVER_RUNNING_PROPERTY);
+		HBox hbox = new HBox(10, label, localPortLabel, copyImage);
+		hbox.disableProperty().bind(AppStaticData.SERVER_RUNNING_PROPERTY.not());
+		return hbox;
 	}
 
-	private Node getCopyServerPortNode(){
-		Hyperlink copyServerPort = new Hyperlink("Copy server Port");
-		copyServerPort.disableProperty().bind(AppStaticData.SERVER_RUNNING_PROPERTY.not());
-		copyServerPort.setOnAction(e-> copyServerPort(copyServerPort));
-		return copyServerPort;
-	}
-
-	private void copyServerPort(Hyperlink link) {
-		controller.copyServerPort();
-		link.setVisited(false);
-	}
 
 	private ImageView getSettingsNode() {
 		ImageView imageView = new ImageView(new Image("resources/settings.png"));
 		imageView.setPreserveRatio(true);
-		imageView.setFitHeight(30);
+		imageView.setFitHeight(35);
 		imageView.setOnMouseEntered(e-> imageView.setCursor(Cursor.HAND));
 		imageView.setOnMouseExited(e-> imageView.setCursor(Cursor.DEFAULT));
 		imageView.setOnMouseClicked(e-> showContextMenu(e));
@@ -74,7 +104,7 @@ public class HeaderView extends HBox{
 		MenuItem configMenu = getMenuItem("Server Configuration", "resources/config.png");
 		MenuItem aboutMenu = getMenuItem("About", "resources/about.png");
 		ContextMenu contextMenu = new ContextMenu();
-		contextMenu.getItems().addAll(configMenu, aboutMenu);
+		contextMenu.getItems().addAll(configMenu, new SeparatorMenuItem(), aboutMenu);
 		return contextMenu;
 	}
 
