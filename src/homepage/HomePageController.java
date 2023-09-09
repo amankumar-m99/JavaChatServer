@@ -42,7 +42,7 @@ public class HomePageController {
 		return homePageView;
 	}
 
-	public void setLeft(ConnectionLogView connectionLogView) {
+	public void setLeft(Node connectionLogView) {
 		homePageView.setLeft(connectionLogView);
 	}
 

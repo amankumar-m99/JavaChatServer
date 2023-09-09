@@ -7,6 +7,7 @@ import java.io.IOException;
 
 import appdata.AppStaticData;
 import connection.Connection;
+import connection.logs.ConnectionLogController;
 import connection.logs.ConnectionLogView;
 import homepage.HomePageController;
 import javafx.scene.Node;
@@ -56,11 +57,8 @@ public class HeaderController {
 	}
 
 	public void viewAllConnectionsBtn() {
-		Connection connection = new Connection();
-		connection.ip = "0:0:0:0";
-		connection.logs = "sdknekdfnlkfnibni";
-		ConnectionLogView connectionLogView = new ConnectionLogView(connection);
-		controller.setLeft(connectionLogView);
+		ConnectionLogController connectionLogController = new ConnectionLogController(controller);
+		controller.setLeft(connectionLogController.getView());
 	}
 
 	public void copyServerIP() {

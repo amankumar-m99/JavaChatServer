@@ -6,6 +6,7 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
 public class OperationsView extends VBox {
 
@@ -33,7 +34,9 @@ public class OperationsView extends VBox {
 		imageView.setPreserveRatio(true);
 		imageView.setFitHeight(35);
 		if(tooltipText != null && tooltipText.length() > 0) {
-			Tooltip.install(imageView, new Tooltip(tooltipText));
+			Tooltip tooltip = new Tooltip(tooltipText);
+			tooltip.setShowDelay(Duration.millis(100));
+			Tooltip.install(imageView, tooltip);
 		}
 		imageView.setOnMouseEntered(e-> imageView.setCursor(Cursor.HAND));
 		imageView.setOnMouseExited(e-> imageView.setCursor(Cursor.DEFAULT));
