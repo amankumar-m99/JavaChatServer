@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.net.Socket;
 import java.net.SocketException;
 
+import appdata.AppStaticData;
+import connection.Connection;
 import util.Logger;
 
 class ServerThread extends Thread {
@@ -14,8 +16,9 @@ class ServerThread extends Thread {
 	private Server server;
 	private Socket socket;
 	private String clientName;
-	DataInputStream dataInputStream;
-	DataOutputStream dataOutputStream;
+	private Connection connection;
+	private DataInputStream dataInputStream;
+	private DataOutputStream dataOutputStream;
 
 	public ServerThread(Server server, Socket socket, String clientName) throws IOException {
 		this.server = server;
@@ -23,6 +26,8 @@ class ServerThread extends Thread {
 		this.clientName = clientName;
 		dataInputStream = new DataInputStream(socket.getInputStream());
 		dataOutputStream = new DataOutputStream(socket.getOutputStream());
+		connection = new Connection(clientName);
+		AppStaticData.ACTIVE_CONNECTIONS.add(connection);
 	}
 
 	@SuppressWarnings("deprecation")
@@ -63,6 +68,7 @@ class ServerThread extends Thread {
 			}  
 		}
 		Logger.log(clientName+" disconnected");
+		AppStaticData.ACTIVE_CONNECTIONS.remove(connection);
 		server.getUserThreads().remove(clientName);
 		this.stop();
 	}

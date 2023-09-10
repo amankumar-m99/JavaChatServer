@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import appdata.AppStaticData;
+import connection.Connection;
 import util.Logger;
 
 public class Server implements Runnable{
@@ -17,8 +18,7 @@ public class Server implements Runnable{
 	public void startServer() {
 		int portNo = 4200;
 		try (ServerSocket ss = new ServerSocket(portNo)) {
-			ss.getInetAddress();
-			Logger.log("Server started at " + InetAddress.getLocalHost() + " on port " + portNo);
+			Logger.log("Server started at " + ss.getInetAddress().getLocalHost() + " on port " + portNo);
 			AppStaticData.SERVER_SOCKET = ss;
 			while (true) {
 				Socket socket = ss.accept();

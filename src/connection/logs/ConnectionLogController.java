@@ -11,9 +11,7 @@ public class ConnectionLogController {
 
 	public ConnectionLogController(HomePageController controller) {
 		this.controller = controller;
-		Connection connection = new Connection();
-		connection.ip = "0:0:0:0";
-		connection.logs = "sdknekdfnlkfnibni";
+		Connection connection = new Connection("ip", "logs");
 		this.connectionLogView = new ConnectionLogView(connection, this);
 	}
 

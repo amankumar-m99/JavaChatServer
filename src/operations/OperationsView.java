@@ -1,21 +1,18 @@
 package operations;
 
-import javafx.geometry.Insets;
 import javafx.scene.Cursor;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.VBox;
-import javafx.util.Duration;
+import javafx.scene.layout.HBox;
 
-public class OperationsView extends VBox {
+public class OperationsView extends HBox {
 
 	private OperationsController controller;
 
 	public OperationsView(OperationsController operationsController) {
 		controller = operationsController;
 		this.setSpacing(30);
-		this.setPadding(new Insets(20,20,10,20));
 		//
 		ImageView copyLogIcon = getImageView("resources/copy.png", "Copy logs to clipboard");
 		copyLogIcon.setOnMouseClicked(e-> controller.copyLogs());
@@ -26,16 +23,16 @@ public class OperationsView extends VBox {
 		ImageView clearLogsIcon = getImageView("resources/clear-logs.png", "Clear log");
 		clearLogsIcon.setOnMouseClicked(e-> controller.clearLogs());
 		//
-		this.getChildren().addAll(copyLogIcon, saveLogIcon, clearLogsIcon);
+		this.getChildren().addAll(saveLogIcon, copyLogIcon, clearLogsIcon);
 	}
 
 	private ImageView getImageView(String path, String tooltipText) {
 		ImageView imageView = new ImageView(new Image(path));
 		imageView.setPreserveRatio(true);
-		imageView.setFitHeight(35);
+		imageView.setFitHeight(20);
 		if(tooltipText != null && tooltipText.length() > 0) {
 			Tooltip tooltip = new Tooltip(tooltipText);
-			tooltip.setShowDelay(Duration.millis(100));
+//			tooltip.setShowDelay(Duration.millis(100));
 			Tooltip.install(imageView, tooltip);
 		}
 		imageView.setOnMouseEntered(e-> imageView.setCursor(Cursor.HAND));

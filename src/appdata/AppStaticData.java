@@ -2,9 +2,12 @@ package appdata;
 
 import java.net.ServerSocket;
 
+import connection.Connection;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
@@ -18,6 +21,7 @@ public class AppStaticData {
 	public static SimpleStringProperty SERVER_LOGS_PROPERTY;
 	public static SimpleIntegerProperty CLIENT_CONNECTIONS;
 	public static ServerSocket SERVER_SOCKET;
+	public static ObservableList<Connection> ACTIVE_CONNECTIONS = FXCollections.observableArrayList();
 
 	public static double getScreenWidth() {
 		return java.awt.Toolkit.getDefaultToolkit().getScreenSize().getWidth();

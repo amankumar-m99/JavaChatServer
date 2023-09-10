@@ -6,15 +6,13 @@ import java.awt.datatransfer.StringSelection;
 import java.io.IOException;
 
 import appdata.AppStaticData;
-import connection.Connection;
-import connection.logs.ConnectionLogController;
-import connection.logs.ConnectionLogView;
+import connection.ConnectionPaneController;
 import homepage.HomePageController;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import server.Server;
 import javafx.scene.control.ContextMenu;
+import server.Server;
 
 public class HeaderController {
 
@@ -57,8 +55,8 @@ public class HeaderController {
 	}
 
 	public void viewAllConnectionsBtn() {
-		ConnectionLogController connectionLogController = new ConnectionLogController(controller);
-		controller.setLeft(connectionLogController.getView());
+		ConnectionPaneController connectionPaneController = new ConnectionPaneController(controller);
+		controller.setLeft(connectionPaneController.getView());
 	}
 
 	public void copyServerIP() {
