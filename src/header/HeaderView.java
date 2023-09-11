@@ -13,8 +13,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.Priority;
+import util.components.XHPane;
 
 public class HeaderView extends HBox{
 
@@ -24,8 +23,7 @@ public class HeaderView extends HBox{
 		this.controller = headerController;
 		this.setSpacing(20);
 		this.setPadding(new Insets(10, 20, 10, 20));
-		Pane pane = new Pane();
-		HBox.setHgrow(pane, Priority.ALWAYS);
+		XHPane pane = new XHPane();
 		ImageView settingImageView = getSettingsNode();
 		Button startBtn = new Button("Start Server");
 		startBtn.setMaxWidth(Double.MAX_VALUE);

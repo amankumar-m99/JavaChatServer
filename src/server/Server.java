@@ -37,7 +37,7 @@ public class Server implements Runnable{
 				st.start();
 			}
 		} catch (IOException e) {
-			e.printStackTrace();
+//			e.printStackTrace();
 			AppStaticData.SERVER_SOCKET = null;
 			AppStaticData.SERVER_RUNNING_PROPERTY.setValue(false);;
 		}

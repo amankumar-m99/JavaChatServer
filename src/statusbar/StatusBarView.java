@@ -7,10 +7,10 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import server.ServerStatus;
 import util.CustumBinding;
+import util.components.XHPane;
 
 public class StatusBarView extends HBox {
 
@@ -20,8 +20,7 @@ public class StatusBarView extends HBox {
 //		this.controller = statusBarController;
 		setSpacing(25);
 		this.setPadding(new Insets(10, 20, 10, 20));
-		Pane xPane = new Pane();
-		HBox.setHgrow(xPane, Priority.ALWAYS);
+		XHPane xPane = new XHPane();
 		getChildren().add(xPane);
 		getChildren().add(getActiveConnectionsIndicator());
 		getChildren().add(new Separator(Orientation.VERTICAL));

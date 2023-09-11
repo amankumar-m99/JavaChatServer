@@ -1,7 +1,6 @@
 package homepage;
 
 import appdata.AppStaticData;
-import connection.logs.ConnectionLogView;
 import header.HeaderController;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
@@ -18,7 +17,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import operations.OperationsController;
 import statusbar.StatusBarController;
-import util.components.xHPane;
+import util.components.XHPane;
 
 public class HomePageController {
 
@@ -50,7 +49,7 @@ public class HomePageController {
 	private Node getServerLogsView() {
 		Label label = new Label("Server Logs");
 		label.setStyle("-fx-font-weight: bold;");
-		xHPane hPane = new xHPane();
+		XHPane hPane = new XHPane();
 		OperationsController operationsController = new OperationsController();
 		HBox hbox = new HBox(10, label, hPane, operationsController.getView());
 		hbox.setPadding(new Insets(20, 5, 5, 5));
